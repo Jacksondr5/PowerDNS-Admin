@@ -2,6 +2,7 @@ on:
   push:
     branches:
       - "master"
+      - "arm-64-build"
     tags:
       - "v*.*.*"
 
