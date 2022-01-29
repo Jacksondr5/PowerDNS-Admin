@@ -1,9 +1,9 @@
 on:
   push:
     branches:
-      - 'master'
+      - "master"
     tags:
-      - 'v*.*.*'
+      - "v*.*.*"
 
 jobs:
   build-and-push-docker-image:
@@ -19,7 +19,7 @@ jobs:
         uses: docker/metadata-action@v3
         with:
           images: |
-            ngoduykhanh/powerdns-admin
+            jacksondr5/powerdns-admin
           tags: |
             type=ref,event=tag
             type=semver,pattern={{version}}
@@ -43,7 +43,8 @@ jobs:
           context: ./
           file: ./docker/Dockerfile
           push: true
-          tags: ngoduykhanh/powerdns-admin:latest
+          tags: jacksondr5/powerdns-admin:latest
+          platforms: linux/amd64,linux/arm64
 
       - name: Build release image
         uses: docker/build-push-action@v2
@@ -54,3 +55,4 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          platforms: linux/amd64,linux/arm64
