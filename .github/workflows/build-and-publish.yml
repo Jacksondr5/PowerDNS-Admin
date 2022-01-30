@@ -45,7 +45,7 @@ jobs:
 
       - name: Build latest image
         uses: docker/build-push-action@v2
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/qemu'
         with:
           context: ./
           file: ./docker/Dockerfile
