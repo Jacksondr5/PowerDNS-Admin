@@ -71,7 +71,8 @@ FROM alpine:3.13
 ENV FLASK_APP=/app/powerdnsadmin/__init__.py \
     USER=pda
 
-RUN apk add --no-cache mariadb-connector-c postgresql-client py3-gunicorn py3-psycopg2 xmlsec tzdata libcap musl-dev gcc libffi-dev py3-pip build-deps python3-dev mariadb-dev && \
+RUN apk add --virtual build-deps && \
+    apk add --no-cache mariadb-connector-c postgresql-client py3-gunicorn py3-psycopg2 xmlsec tzdata libcap musl-dev gcc libffi-dev py3-pip python3-dev mariadb-dev && \
     addgroup -S ${USER} && \
     adduser -S -D -G ${USER} ${USER} && \
     mkdir /data && \
