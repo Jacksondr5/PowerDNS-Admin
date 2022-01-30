@@ -80,7 +80,11 @@ RUN apk add --no-cache mariadb-connector-c postgresql-client py3-gunicorn py3-ps
     apk del libcap
 
 COPY --from=builder /usr/bin/flask /usr/bin/
-COPY --from=builder /usr/lib/python3.8/site-packages /usr/lib/python3.8/site-packages/
+# COPY --from=builder /usr/lib/python3.8/site-packages /usr/lib/python3.8/site-packages/
+WORKDIR /build
+COPY ./requirements.txt /build/requirements.txt
+RUN pip install --upgrade pip && \
+    pip install -r requirements.txt
 COPY --from=builder --chown=root:${USER} /app /app/
 COPY ./docker/entrypoint.sh /usr/bin/
 
